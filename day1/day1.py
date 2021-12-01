@@ -1,20 +1,30 @@
-def differences(filename):
+def differences(filename, window_size):
     diffs = []
-    current = 0
+    window = [0] * window_size
     with open(filename) as file:
         for line in file:
-            prev = current
-            current = int(line.strip())
-            diffs.append(current - prev)
-    return diffs[1:]
+            window.append(int(line.strip()))
+            diffs.append(window[-1] - window[0])
+            window.pop(0)
+    return diffs[window_size:]
 
-def count_positive(diffs):
-    positive_diffs = [item for item in diffs if item > 0]
-    return len(positive_diffs)
+
+def count_positive(items):
+    positive = [item for item in items if item > 0]
+    return len(positive)
+
+
+def count_positive_differences(filename, window_size):
+    diffs = differences(filename, window_size)
+    return count_positive(diffs)
+
 
 def part_one(input):
-    diffs = differences(input)
-    print(count_positive(diffs))
+    print(count_positive_differences(input, 1))
 
 
-part_one('day1/input')
+def part_two(input):
+    print(count_positive_differences(input, 3))
+
+
+part_two('day1/input')
