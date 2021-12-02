@@ -40,5 +40,5 @@ def move_two(direction, amount, location):
     return location
 
 
-#print(process('day2/input', move_one))
+print(process('day2/input', move_one))
 print(process('day2/input', move_two))
