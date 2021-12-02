@@ -4,7 +4,7 @@ def process(filename, move_fn):
         'depth': 0,
         'aim': 0
     }
-    
+
     with open(filename) as file:
         for line in file:
             location = move_fn(*parse(line), location)
@@ -42,4 +42,3 @@ def move_two(direction, amount, location):
 
 #print(process('day2/input', move_one))
 print(process('day2/input', move_two))
-
