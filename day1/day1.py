@@ -19,12 +19,12 @@ def count_positive_differences(filename, window_size):
     return count_positive(diffs)
 
 
-def part_one(input):
-    print(count_positive_differences(input, 1))
+def part_one(input_file):
+    print(count_positive_differences(input_file, 1))
 
 
-def part_two(input):
-    print(count_positive_differences(input, 3))
+def part_two(input_file):
+    print(count_positive_differences(input_file, 3))
 
 
 part_two('day1/input')
