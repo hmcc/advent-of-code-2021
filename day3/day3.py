@@ -16,12 +16,11 @@ def transpose(numbers):
 def count(number_list, idx, default):
     next_idx = idx + 1 if idx >= 0 else idx - 1
     counts = Counter(number_list).most_common()
-    if (len(counts) == 1):
+    if len(counts) == 1:
         return counts[0][0]
     if default is not None and counts[idx][1] == counts[next_idx][1]:
         return default
-    else:
-        return counts[-idx][0]
+    return counts[-idx][0]
 
 
 def least_common(number_list, default=None):
