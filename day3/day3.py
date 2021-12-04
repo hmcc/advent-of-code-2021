@@ -1,5 +1,6 @@
 from collections import Counter
 
+
 def read_input(filename):
     numbers = []
     with open(filename) as file:
@@ -10,7 +11,6 @@ def read_input(filename):
 
 def transpose(numbers):
     return tuple(map(tuple, zip(*numbers)))
-
 
 
 def count(number_list, idx, default):
@@ -25,7 +25,6 @@ def count(number_list, idx, default):
 
 def least_common(number_list, default=None):
     return count(number_list, -1, default)
-
 
 
 def most_common(number_list, default=None):
@@ -60,7 +59,6 @@ def co2_scrubber_rating(numbers):
     return binary_digits_to_decimal(numbers[0])
 
 
-
 def part_one(filename):
     numbers = read_input(filename)
     transposed = transpose(numbers)
@@ -74,7 +72,6 @@ def part_two(filename):
     o2 = o2_generator_rating(numbers)
     co2 = co2_scrubber_rating(numbers)
     return o2 * co2
-
 
 
 print(part_two('day3/input'))
