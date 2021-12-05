@@ -12,8 +12,8 @@ def read_grids(file):
     for line in file:
         if line.strip():
             grids[-1].append([int(n) for n in line.strip().split()])
-        elif len(grids[-1]):
-             grids.append([])
+        elif len(grids[-1]) > 0:
+            grids.append([])
     return grids
 
 
@@ -38,14 +38,11 @@ def score(grid, number):
 def part_one(filename):
     drawn, grids = read_input(filename)
     for number in drawn:
-        for idx in range(len(grids)):
-            grids[idx] = mark_grid(grids[idx], number)
+        for idx, grid in enumerate(grids):
+            grids[idx] = mark_grid(grid, number)
             if grid_wins(grids[idx]):
                 return score(grids[idx], number)
+    return 0
 
 
 print(part_one('day4/input'))
-
-
-
-
