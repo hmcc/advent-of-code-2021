@@ -1,5 +1,6 @@
 MARKER = '*'
 
+
 def read_input(filename):
     with open(filename) as file:
         draw = [int(n) for n in file.readline().strip().split(',')]
