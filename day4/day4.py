@@ -36,14 +36,26 @@ def score(grid, number):
     return sum(map(sum, grid)) * number
 
 
-def part_one(filename):
+def play(filename, let_squid_win=False):
     drawn, grids = read_input(filename)
     for number in drawn:
+        winning_grids = []
         for idx, grid in enumerate(grids):
             grids[idx] = mark_grid(grid, number)
             if grid_wins(grids[idx]):
-                return score(grids[idx], number)
+                if not let_squid_win or len(grids) <= 1:
+                    return score(grids[idx], number)
+                winning_grids.append(idx)
+        grids = [grid for idx, grid in enumerate(grids) if idx not in winning_grids]
     return 0
 
 
-print(part_one('day4/input'))
+def part_one(filename):
+    return play(filename)
+
+
+def part_two(filename):
+    return play(filename, True)
+
+
+print(part_two('day4/input'))
