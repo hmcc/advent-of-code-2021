@@ -45,7 +45,7 @@ def fill_diagonal(start, end):
     y2 = end[1]
     xstep = 1 if x2 > x1 else -1
     ystep = 1 if y2 > y1 else -1
-    return [(x, y) for x, y in zip(range(x1, x2 + xstep, xstep), range(y1, y2 + ystep, ystep))]
+    return list(zip(range(x1, x2 + xstep, xstep), range(y1, y2 + ystep, ystep)))
 
 
 def fill_all(coordinates, *fill_fns):
@@ -53,7 +53,6 @@ def fill_all(coordinates, *fill_fns):
     for start, end in coordinates:
         for fill_fn in fill_fns:
             all_coordinates.extend(fill_fn(start, end))
-            pass   
     return all_coordinates
 
 
