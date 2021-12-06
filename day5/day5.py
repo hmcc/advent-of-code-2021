@@ -16,33 +16,44 @@ def read_input(filename):
     return coordinates
 
 
-def fill_x(coordinates):
-    y = coordinates[0][1]
-    x1 = coordinates[0][0]
-    x2 = coordinates[1][0]
-    if x2 < x1:
-        x1, x2 = x2, x1
-    return [(x, y) for x in range(x1, x2 + 1)]
+def fill_x(start, end):
+    if not start[1] == end[1]:
+        return []
+    y = start[1]
+    x1 = start[0]
+    x2 = end[0]
+    step = 1 if x2 > x1 else -1
+    return [(x, y) for x in range(x1, x2 + step, step)]
 
 
-def fill_y(coordinates):
-    x = coordinates[0][0]
-    y1 = coordinates[0][1]
-    y2 = coordinates[1][1]
-    if y2 < y1:
-        y1, y2 = y2, y1
-    return [(x, y) for y in range(y1, y2 + 1)]
+def fill_y(start, end):
+    if not start[0] == end[0]:
+        return []
+    x = start[0]
+    y1 = start[1]
+    y2 = end[1]
+    step = 1 if y2 > y1 else -1
+    return [(x, y) for y in range(y1, y2 + step, step)]
 
 
-def fill_all(coordinates):
+def fill_diagonal(start, end):
+    if not abs(start[0] - end[0]) == abs(start[1] - end[1]):
+        return []
+    x1 = start[0]
+    x2 = end[0]
+    y1 = start[1]
+    y2 = end[1]
+    xstep = 1 if x2 > x1 else -1
+    ystep = 1 if y2 > y1 else -1
+    return [(x, y) for x, y in zip(range(x1, x2 + xstep, xstep), range(y1, y2 + ystep, ystep))]
+
+
+def fill_all(coordinates, *fill_fns):
     all_coordinates = []
     for start, end in coordinates:
-        if start[0] == end[0]:
-            all_coordinates.extend(fill_y((start, end)))
-        elif start[1] == end[1]:
-            all_coordinates.extend(fill_x((start, end)))
-        else:
-            pass   # skip all but horizontal or vertical lines
+        for fill_fn in fill_fns:
+            all_coordinates.extend(fill_fn(start, end))
+            pass   
     return all_coordinates
 
 
@@ -58,8 +69,7 @@ def update_grid(grid, fills):
     return grid
 
 
-def part_one(filename, debug=False):
-    coordinates = fill_all(read_input(filename))
+def count_two_or_more_occurrences(coordinates, debug=False):
     grid = initialise_grid(coordinates)
     grid = update_grid(grid, coordinates)
     if debug:
@@ -68,6 +78,15 @@ def part_one(filename, debug=False):
     return len(just_two_and_above)
 
 
+def part_one_coordinates(filename, debug=False):
+    coordinates = fill_all(read_input(filename), fill_x, fill_y)
+    return count_two_or_more_occurrences(coordinates, debug)
+
+
+def part_two(filename, debug=False):
+    coordinates = fill_all(read_input(filename), fill_x, fill_y, fill_diagonal)
+    return count_two_or_more_occurrences(coordinates, debug)
+
 
 def pretty_print(grid):
     for row in grid:
@@ -75,4 +94,4 @@ def pretty_print(grid):
     print()
 
 
-print(part_one('day5/input'))
+print(part_two('day5/input'))

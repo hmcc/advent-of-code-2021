@@ -19,27 +19,44 @@ def test_read_input():
 
 
 def test_fill_x():
-    filled = day5.fill_x(((0, 9), (5, 9)))
+    filled = day5.fill_x((0, 9), (5, 9))
     assert filled == [(0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9)]
 
 
 def test_fill_y():
-    filled = day5.fill_y(((2, 2), (2, 1)))
-    assert filled == [(2, 1), (2, 2)]
+    filled = day5.fill_y((2, 2), (2, 1))
+    assert filled == [(2, 2), (2, 1)]
 
 
-def test_fill_all():
+def test_fill_diagonal():
+    filled = day5.fill_diagonal((6, 4), (2, 0))
+    assert filled == [(6, 4), (5, 3), (4, 2), (3, 1), (2, 0)]
+
+
+def test_fill_all_x_y():
     input = [
         ((0, 9), (5, 9)),
         ((8, 0), (0, 8)),
         ((9, 4), (3, 4))
     ]
-    filled = day5.fill_all(input)
+    filled = day5.fill_all(input, day5.fill_x, day5.fill_y)
     assert filled == [
         (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9),
-        # the second pair is not a diagonal line so this gets skipped
-        # the third pair gets reversed smallest to biggest
-        (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4)
+        (9, 4), (8, 4), (7, 4), (6, 4), (5, 4), (4, 4), (3, 4)
+    ]
+
+
+def test_fill_all_x_y_diagonal():
+    input = [
+        ((0, 9), (5, 9)),
+        ((8, 0), (0, 8)),
+        ((9, 4), (3, 4))
+    ]
+    filled = day5.fill_all(input, day5.fill_x, day5.fill_y, day5.fill_diagonal)
+    assert filled == [
+        (0, 9), (1, 9), (2, 9), (3, 9), (4, 9), (5, 9),
+        (8, 0), (7, 1), (6, 2), (5, 3), (4, 4), (3, 5), (2, 6), (1, 7), (0, 8),
+        (9, 4), (8, 4), (7, 4), (6, 4), (5, 4), (4, 4), (3, 4)
     ]
 
 
