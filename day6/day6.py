@@ -22,7 +22,7 @@ def count(fish):
 
 
 def run(fish, days):
-    for d in range(days):
+    for _ in range(days):
         fish = age(fish)
     return count(fish)
 
