@@ -16,19 +16,12 @@ def read_input(filename):
     return coordinates
 
 
-def swap(a, b):
-    tmp = a
-    a = b
-    b = tmp
-    return (a, b)
-
-
 def fill_x(coordinates):
     y = coordinates[0][1]
     x1 = coordinates[0][0]
     x2 = coordinates[1][0]
-    if (x2 < x1):
-        x1, x2 = swap(x1, x2)
+    if x2 < x1:
+        x1, x2 = x2, x1
     return [(x, y) for x in range(x1, x2 + 1)]
 
 
@@ -36,8 +29,8 @@ def fill_y(coordinates):
     x = coordinates[0][0]
     y1 = coordinates[0][1]
     y2 = coordinates[1][1]
-    if (y2 < y1):
-        y1, y2 = swap(y1, y2)
+    if y2 < y1:
+        y1, y2 = y2, y1
     return [(x, y) for y in range(y1, y2 + 1)]
 
 
