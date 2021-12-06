@@ -59,7 +59,7 @@ def fill_all(coordinates, *fill_fns):
 def initialise_grid(coordinates):
     cols = max(coord[0] for coord in coordinates) + 1
     rows = max(coord[1] for coord in coordinates) + 1
-    return [ [0]*cols for i in range(rows)]
+    return [[0]*cols for i in range(rows)]
 
 
 def update_grid(grid, fills):
