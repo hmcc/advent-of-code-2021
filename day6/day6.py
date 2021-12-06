@@ -32,4 +32,9 @@ def day_one(filename):
     return run(fish, 80)
 
 
-print(day_one('day6/input'))
+def day_two(filename):
+    fish = read_input(filename)
+    return run(fish, 256)
+
+
+print(day_two('day6/input'))
