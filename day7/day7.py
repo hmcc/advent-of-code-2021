@@ -8,7 +8,7 @@ def read_input(filename):
 
 
 def triangle(n):
-    return sum(range(n+1))
+    return int(n * (n + 1) / 2)
 
 
 def cost_one(positions, position):
