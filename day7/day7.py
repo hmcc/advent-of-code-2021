@@ -1,6 +1,3 @@
-from collections import Counter, defaultdict
-
-
 def read_input(filename):
     with open(filename) as file:
         positions = [int(n) for n in file.readline().strip().split(',')]
@@ -25,13 +22,11 @@ def solve(positions, cost_fn):
 
 
 def part_one(filename):
-    return solve(read_input('day7/input'), cost_one)
+    return solve(read_input(filename), cost_one)
 
 
 def part_two(filename):
-    return solve(read_input('day7/input'), cost_two)
+    return solve(read_input(filename), cost_two)
 
 
 print(part_two('day7/input'))
-
-
