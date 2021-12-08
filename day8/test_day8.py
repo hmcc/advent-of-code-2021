@@ -11,15 +11,25 @@ def test_parse_line():
     assert day8.parse_line(line) == expected
 
 
+def test_decode_by_lookup():
+    assert day8.decode_by_lookup('ab', {'ab': 'cf'})  == 'cf'
+
+
 @pytest.mark.parametrize('input, output', [
-    ('cf', 1),
-    ('be', 1),
-    ('acf', 7),
-    ('cbg', 7),
-    ('bcdf', 4),
-    ('gcbe', 4),
-    ('abcdefg', 8),
-    ('dgebacf', 8)
+    ('cf', 'cf'),
+    ('be', 'cf'),
+    ('cbg', 'acf'),
+    ('gcbe', 'bcdf'),
+    ('dgebacf', 'abcdefg')
 ])
-def test_decode(input, output):
-    assert day8.decode(input) == output
+def test_decode_by_letter_count(input, output):
+    assert day8.decode_by_letter_count(input) == output
+
+
+def test_infer():
+    decoder = {
+        'be': 'cf',
+        'b': 'f'
+    }
+    day8.infer(decoder)
+    assert 'e' in decoder
