@@ -125,9 +125,9 @@ def part_two(filename):
                     decoder[signal_pattern] = decode_pattern(signal_pattern, decoder)
                 except KeyError:
                     pass
-                infer(decoder)
+            infer(decoder)
         total += decode_output(output, decoder)
     return total
 
 
-print(part_two('day8/input_sample'))
+print(part_two('day8/input'))
