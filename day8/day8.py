@@ -1,7 +1,6 @@
 from collections import Counter
 from itertools import permutations
 
-
 letters_to_numbers = {
     'abcefg': 0,
     'cf': 1,
