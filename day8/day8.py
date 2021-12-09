@@ -48,7 +48,7 @@ def difference(str1, str2):
     return ''.join(as_list)
 
 
-def decode_by_lookup(signal_pattern, decoder = {}):
+def decode_by_lookup(signal_pattern, decoder):
     try:
         return decoder[signal_pattern]
     except KeyError:
@@ -92,7 +92,7 @@ def infer(decoder):
             pass
 
 
-def decode_pattern(signal_pattern, decoder = {}):
+def decode_pattern(signal_pattern, decoder):
     try:
         return decode_by_lookup(signal_pattern, decoder)
     except KeyError:
@@ -110,8 +110,13 @@ def is_complete(signal, decoder):
 
 def part_one(filename):
     outputs = all_output(read_file(filename))
-    decoded_to_number = [letters_to_numbers(decode_by_letter_count(letters)) for letters in outputs]
-    return len([n for n in decoded_to_number if n])
+    decoded = []
+    for pattern in outputs:
+        try:
+            decoded.append(letters_to_numbers[decode_by_letter_count(pattern)])
+        except KeyError:
+            pass
+    return len(decoded)
 
 
 def part_two(filename):
@@ -130,4 +135,4 @@ def part_two(filename):
     return total
 
 
-print(part_two('day8/input'))
+print(part_one('day8/input_sample'))
