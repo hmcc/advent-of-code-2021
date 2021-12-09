@@ -19,7 +19,7 @@ heightmap = day9.read_file('day9/input_sample')
     ])
 ])
 def test_adjacent(origin_coordinates, adjacent_coordinates):
-    assert day9.adjacent(origin_coordinates, heightmap) == adjacent_coordinates
+    assert set(day9.adjacent(origin_coordinates, heightmap)) == set(adjacent_coordinates)
 
 
 @pytest.mark.parametrize('origin_coordinates,expected_result', [
@@ -53,4 +53,4 @@ def test_low_point(origin_coordinates, expected_result):
     ))
 ])
 def test_flow(origin_coordinates, adjacent_coordinates):
-    assert set(day9.flow(origin_coordinates, heightmap)) == set(adjacent_coordinates)
+    assert set(day9.flow(origin_coordinates, heightmap, set())) == set(adjacent_coordinates)
