@@ -60,9 +60,9 @@ def completion_score(line):
     score = 0
     try:
         stack = parse(line)
-        while(len(stack) > 0):
+        while len(stack) > 0:
             score = score * 5 + completion_scores[pairs[stack.pop()]]
-    except ClosingCharacterError as e:
+    except ClosingCharacterError:
         pass
     return score
 
