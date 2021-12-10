@@ -6,12 +6,26 @@ pairs = {
 }
 
 
-scores = {
+completion_scores = {
+    ')': 1,
+    ']': 2,
+    '}': 3,
+    '>': 4
+}
+
+
+syntax_scores = {
     ')': 3,
     ']': 57,
     '}': 1197,
     '>': 25137
 }
+
+
+class ClosingCharacterError(Exception):
+    def __init__(self, character: str, *args: object) -> None:
+        super().__init__(*args)
+        self.character = character
 
 
 def read_file(filename):
@@ -22,7 +36,7 @@ def read_file(filename):
                 yield line
 
 
-def score(line):
+def parse(line):
     stack = []
     for c in line:
         if c in pairs:
@@ -30,12 +44,38 @@ def score(line):
         elif pairs[stack[-1]] == c:
             stack.pop()
         else:
-            return scores[c]
-    return 0
+            raise ClosingCharacterError(c)
+    return stack
+
+
+def syntax_score(line):
+    try:
+        parse(line)
+        return 0
+    except ClosingCharacterError as e:
+        return syntax_scores[e.character]
+
+
+def completion_score(line):
+    score = 0
+    try:
+        stack = parse(line)
+        while(len(stack) > 0):
+            score = score * 5 + completion_scores[pairs[stack.pop()]]
+    except ClosingCharacterError as e:
+        pass
+    return score
 
 
 def part_one(filename):
-    return sum(score(line) for line in read_file(filename))
+    return sum(syntax_score(line) for line in read_file(filename))
 
 
-print(part_one('day10/input'))
+def part_two(filename):
+    scores = [completion_score(line) for line in read_file(filename)]
+    scores = [score for score in scores if score > 0]
+    scores.sort()
+    return scores[len(scores) // 2]
+
+
+print(part_two('day10/input'))
