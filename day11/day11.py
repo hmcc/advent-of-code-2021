@@ -3,7 +3,6 @@ class DumboOctopus:
         self.value = value
         self.flashed = False
 
-
     def update(self) -> int:
         if not self.flashed:
             self.value = (self.value + 1) % 10
