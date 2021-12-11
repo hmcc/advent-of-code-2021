@@ -2,7 +2,7 @@ class DumboOctopus:
     def __init__(self, value):
         self.value = value
         self.flashed = False
-    
+
 
     def update(self) -> int:
         if not self.flashed:
@@ -30,20 +30,16 @@ def reset(octos):
             octo.flashed = False
 
 
-def all_flashed(octos):
-    return all([octo.flashed for row in octos for octo in row])
-
-
 def neighbours(x, y, octos):
     possible_y = tuple(y1 for y1 in (y - 1, y, y + 1) if 0 <= y1 < len(octos))
     possible_x = tuple(x1 for x1 in (x - 1, x, x + 1) if 0 <= x1 < len(octos[0]))
-    neighbours = []
+    found = []
     for y1 in possible_y:
         for x1 in possible_x:
             if x1 == x and y1 == y:
                 continue
-            neighbours += [(x1, y1)]
-    return neighbours
+            found += [(x1, y1)]
+    return found
 
 
 def process(octos):
@@ -80,4 +76,3 @@ def part_two(filename):
 
 
 print(part_two('day11/input'))
-
