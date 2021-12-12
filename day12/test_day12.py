@@ -29,8 +29,17 @@ def test_is_lowercase(line, expected_result):
 
 @pytest.mark.parametrize('path, next_step, expected_result', [
     (['start'], 'A', True),
-    (['b', 'd'], 'b', False),
-    (['A', 'B', 'C', 'A'], 'B', False),
+    (['b', 'd'], 'b', False)
 ])
 def test_can_step(path, next_step, expected_result):
     assert day12.can_step(path, next_step) == expected_result
+
+
+@pytest.mark.parametrize('path, next_step, expected_result', [
+    (['start'], 'A', True),
+    (['b', 'd'], 'b', True),
+    (['b', 'b', 'd'], 'b', False),
+    (['a', 'a', 'b', 'd'], 'b', False)
+])
+def test_can_step_with_visit_twice(path, next_step, expected_result):
+    assert day12.can_step(path, next_step, True) == expected_result
