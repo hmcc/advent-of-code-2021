@@ -1,6 +1,7 @@
 from collections import defaultdict, Counter
 import re
 
+
 lowercase = re.compile('[a-z]+')
 
 
