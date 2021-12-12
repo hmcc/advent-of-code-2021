@@ -31,15 +31,15 @@ def visited_small_cave_twice_already(path):
     return counts[0][1] >= 2
 
 
-def can_step(current_path, next_step, visit_small_cave_twice = False):
+def can_step(current_path, next_step, visit_small_cave_twice=False):
     if next_step == 'start':
         return False
-    return not (is_lowercase(next_step) \
-        and next_step in current_path \
-        and (not visit_small_cave_twice or visited_small_cave_twice_already(current_path)))
+    return not (is_lowercase(next_step)
+            and next_step in current_path
+            and (not visit_small_cave_twice or visited_small_cave_twice_already(current_path)))
 
 
-def find_paths(path_im_on, path_map, visit_small_cave_twice = False):
+def find_paths(path_im_on, path_map, visit_small_cave_twice=False):
     paths = []
     current_step = path_im_on[-1]
     next_steps = path_map[current_step]
