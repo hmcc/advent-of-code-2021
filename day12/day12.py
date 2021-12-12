@@ -37,7 +37,7 @@ def can_step(current_path, next_step, visit_small_cave_twice = False):
     return not (is_lowercase(next_step) \
         and next_step in current_path \
         and (not visit_small_cave_twice or visited_small_cave_twice_already(current_path)))
-    
+
 
 def find_paths(path_im_on, path_map, visit_small_cave_twice = False):
     paths = []
@@ -51,14 +51,14 @@ def find_paths(path_im_on, path_map, visit_small_cave_twice = False):
     return paths
 
 
-def part_one(path_map):
+def part_one(filename):
+    path_map = build_map(filename)
     return len(find_paths(['start'], path_map))
 
 
-def part_two(path_map):
+def part_two(filename):
+    path_map = build_map(filename)
     return len(find_paths(['start'], path_map, True))
 
 
-path_map = build_map('day12/input_sample')
-print(part_two(path_map))
-
+print(part_two('day12/input_sample'))
