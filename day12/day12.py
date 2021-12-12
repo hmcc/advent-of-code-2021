@@ -35,8 +35,8 @@ def can_step(current_path, next_step, visit_small_cave_twice=False):
     if next_step == 'start':
         return False
     return not (is_lowercase(next_step)
-            and next_step in current_path
-            and (not visit_small_cave_twice or visited_small_cave_twice_already(current_path)))
+                and next_step in current_path
+                and (not visit_small_cave_twice or visited_small_cave_twice_already(current_path)))
 
 
 def find_paths(path_im_on, path_map, visit_small_cave_twice=False):
