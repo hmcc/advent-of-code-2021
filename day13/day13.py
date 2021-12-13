@@ -83,7 +83,10 @@ def part_one(filename):
 
 
 def part_two(filename):
-    pass
+    grid, folds = parse_file(filename)
+    for direction, location in folds:
+        grid = fold(grid, direction, location)
+    return grid
 
 
 def pretty_print(grid):
@@ -92,4 +95,4 @@ def pretty_print(grid):
     print()
 
 
-print(part_one('day13/input'))
+pretty_print(part_two('day13/input'))
