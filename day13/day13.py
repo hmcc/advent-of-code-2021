@@ -21,7 +21,7 @@ def parse_file(filename):
 
 
 def parse_plot(line):
-    x, y  = line.strip().split(',')
+    x, y = line.strip().split(',')
     return (int(x), int(y))
 
 
@@ -34,9 +34,9 @@ def parse_fold(line):
 
 def to_grid(plots):
     width = max(plots)[0] + 1
-    height = max(plots,key=itemgetter(1))[1] + 1
+    height = max(plots, key=itemgetter(1))[1] + 1
     grid = [[0 for x in range(width)] for y in range(height)]
-    for x,y in plots:
+    for x, y in plots:
         grid[y][x] = 1
     return grid
 
@@ -80,7 +80,6 @@ def part_one(filename):
     direction, location = folds[0]
     grid = fold(grid, direction, location)
     return count(grid)
-
 
 
 def part_two(filename):
