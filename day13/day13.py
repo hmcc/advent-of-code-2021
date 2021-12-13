@@ -10,13 +10,13 @@ def parse_file(filename):
     with open(filename) as file:
         for line in file:
             try:
-                plots.append(parse_plot(line)) 
+                plots.append(parse_plot(line))
             except ValueError:
                 try:
                     folds.append(parse_fold(line))
                 except ValueError:
                     pass
-        
+
     return to_grid(plots), folds
 
 
@@ -35,7 +35,7 @@ def parse_fold(line):
 def to_grid(plots):
     width = max(plots)[0] + 1
     height = max(plots,key=itemgetter(1))[1] + 1
-    grid = [[0 for x in range(width)] for y in range(height)] 
+    grid = [[0 for x in range(width)] for y in range(height)]
     for x,y in plots:
         grid[y][x] = 1
     return grid
@@ -68,6 +68,7 @@ def fold(grid, direction, location):
         return fold_x(grid, location)
     if direction == 'y':
         return fold_y(grid, location)
+    raise ValueError
 
 
 def count(grid):
