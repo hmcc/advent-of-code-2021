@@ -14,10 +14,7 @@ def test_parse_file():
 
 
 @pytest.mark.parametrize('polymer, result', [
-    ('NNCB', 'NCNBCHB'),
-    ('NCNBCHB', 'NBCCNBBBCBHCB'),
-    ('NBCCNBBBCBHCB', 'NBBBCNCCNBBNBNBBCHBHHBCHB'),
-    ('NBBBCNCCNBBNBNBBCHBHHBCHB', 'NBBNBNBBCCNBCNCCNBBNBBNBBBNBBNBBCBHCBHHNHCBBCBHCB'),
+    ({'NN': 1, 'NC': 1, 'CB': 1}, {'NC': 1, 'CN': 1, 'NB': 1, 'BC': 1, 'CH': 1, 'HB': 1}),
 ])
 def test_process_once(polymer, result):
     pairs = {
