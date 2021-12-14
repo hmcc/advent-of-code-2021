@@ -13,24 +13,6 @@ def test_parse_file():
     assert pairs['CH'] == 'B'
 
 
-@pytest.mark.parametrize('polymer, key, result', [
-    ('NNCB', 'NN', [1]),
-    ('NNCB', 'CH', []),
-    ('NNCBNN', 'NN', [1, 5]),
-])
-def test_insertion_indices(polymer, key, result):
-    assert day14.insertion_indices(polymer, key) == result
-
-
-@pytest.mark.parametrize('polymer, insertions, result', [
-    ('NNCB', {1: 'C'}, 'NCNCB'),
-    ('NNCB', {}, 'NNCB'),
-    ('NNCBNN', {1: 'C', 5: 'C'}, 'NCNCBNCN')
-])
-def test_insert(polymer, insertions, result):
-    assert day14.insert(polymer, insertions) == result
-
-
 @pytest.mark.parametrize('polymer, result', [
     ('NNCB', 'NCNBCHB'),
     ('NCNBCHB', 'NBCCNBBBCBHCB'),
