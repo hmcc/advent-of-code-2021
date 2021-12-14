@@ -1,5 +1,4 @@
 from collections import Counter, defaultdict
-from math import ceil
 
 
 def parse_file(filename):
