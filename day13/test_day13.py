@@ -3,9 +3,6 @@ import pytest
 from day13 import day13
 
 
-path_map = day13.parse_file('day12/input_sample')
-
-
 @pytest.mark.parametrize('line, point', [
     ('6,10',(6, 10)),
     ('0,14',(0, 14)),
