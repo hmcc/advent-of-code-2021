@@ -1,6 +1,7 @@
+import time
 from itertools import product
 from math import inf
-import time
+
 from heapdict import heapdict
 
 
