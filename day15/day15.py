@@ -1,5 +1,6 @@
 from collections import Counter
 from math import inf
+from operator import mul
 import time
 
 def read_file(filename):
@@ -36,28 +37,30 @@ def next_visit(risks, visited):
     return counted[-1][0]
 
 
-def visit(x, y, cavern, risks, visited):
-    visited.add((x, y))
-    for adjacent in neighbours(x, y, *(dimensions(cavern)), visited):
-        new_risk = risks[(x, y)] + cavern[adjacent]
+def visit(coordinates, cavern, dim, risks, visited):
+    visited.add(coordinates)
+    for adjacent in neighbours(*coordinates, *dim, visited):
+        new_risk = risks[coordinates] + cavern[adjacent]
         if new_risk < risks[adjacent]:
             risks[adjacent] = new_risk
+    del cavern[coordinates]
 
 
-def answer(cavern, risks):
-    return risks[tuple(d - 1 for d in dimensions(cavern))]
+def answer(max_x, max_y, risks):
+    return risks[(max_x - 1, max_y - 1)]
 
 
 def part_one(filename):
     cavern = read_file(filename)
     risks = initialise_risks(cavern)
     visited = set()
+    max_x, max_y = dimensions(cavern)
 
-    while len(visited) < len(cavern):
+    while len(visited) < max_x * max_y:
         todo = next_visit(risks, visited)
-        visit(*todo, cavern, risks, visited)
+        visit(todo, cavern, (max_x, max_y), risks, visited)
     
-    return answer(cavern, risks)
+    return answer(max_x, max_y, risks)
 
 
 def pretty_print(risks):
