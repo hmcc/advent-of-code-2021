@@ -1,6 +1,7 @@
-from heapdict import heapdict
 from math import inf
 import time
+from heapdict import heapdict
+
 
 def read_file(filename):
     risk_levels = []
@@ -35,12 +36,12 @@ def initialise_risks(cavern):
 
 
 def next_visit(queue):
-    return queue.popitem()
+    return queue.popitem()[0]
 
 
-def visit(coordinates, risk, cavern, cavern_dimensions, risks, queue):
+def visit(coordinates, cavern, cavern_dimensions, risks, queue):
     for adjacent in neighbours(*coordinates, *cavern_dimensions, queue):
-        new_risk = risk + cavern[adjacent]
+        new_risk = risks[coordinates] + cavern[adjacent]
         if new_risk < risks[adjacent]:
             risks[adjacent] = new_risk
             queue[adjacent] = new_risk
@@ -57,9 +58,9 @@ def part_one(filename):
     max_x, max_y = dimensions(cavern)
 
     while queue:
-        coordinates, risk = next_visit(queue)
-        visit(coordinates, risk, cavern, (max_x, max_y), risks, queue)
-    
+        coordinates = next_visit(queue)
+        visit(coordinates, cavern, (max_x, max_y), risks, queue)
+
     return answer(max_x, max_y, risks)
 
 
