@@ -11,6 +11,7 @@ jobs:
         with:
           python-root-list: "**/day*.py"
           use-black: false
+          use-mypy: false
           extra-pycodestyle-options: "--max-line-length=120"
   Test:
     runs-on: ubuntu-latest
