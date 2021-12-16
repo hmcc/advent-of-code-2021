@@ -25,7 +25,6 @@ def expand(cavern, factor, max_x, max_y):
     return expanded_cavern
 
 
-
 def dimensions(cavern):
     max_x = max(x for x, _ in cavern)
     max_y = max(y for _, y in cavern)
@@ -96,7 +95,6 @@ def pretty_print(cavern, max_x, max_y):
         grid[y][x] = value
     for row in grid:
         print(''.join([str(item).ljust(2) for item in row]))
-
 
 
 start_time = time.time()
